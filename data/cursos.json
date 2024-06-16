@@ -1,0 +1,117 @@
+{
+    "cursos": [
+        {
+            "nombre": "JavaScript"
+        },
+        {
+            "nombre": "Cocina Mexicana"
+        },
+        {
+            "nombre": "Vegetales"
+        },
+        {
+            "nombre": "Angular"
+        },
+        {
+            "nombre": "Musica Clasica"
+        },
+        {
+            "nombre": "Horticultura"
+        },
+        {
+            "nombre": "Reposteria"
+        }
+    ],
+    "curso": [
+        {
+            "nombre": "JavaScript",
+            "descripcion": "JavaScript para Principiantes",
+            "categoria": 2,
+            "precio": "5,99",
+            "valoracion": 4,
+            "imagen": "curso1.jpg"
+        },
+        {
+            "nombre": "Cocina Mexicana",
+            "descripcion": "Comida Mexicana para principiantes",
+            "categoria": 4,
+            "precio": "2,99",
+            "valoracion": 5,
+            "imagen": "curso2.jpg"
+        },
+        {
+            "nombre": "Vegetales",
+            "descripcion": "Cosecha tus propias frutas en casa",
+            "categoria": 3,
+            "precio": "3,99",
+            "valoracion": 4,
+            "imagen": "curso4.jpg"
+        },
+        {
+            "nombre": "Angular",
+            "descripcion": "Angular para Principiantes",
+            "categoria": 2,
+            "precio": "4,99",
+            "valoracion": 3,
+            "imagen": "curso1.jpg"
+        },
+        {
+            "nombre": "Musica Clasica",
+            "descripcion": "Aprende a tocar el piano",
+            "categoria": 1,
+            "precio": "6,99",
+            "valoracion": 3,
+            "imagen": "curso3.jpg"
+        },
+        {
+            "nombre": "Horticultura",
+            "descripcion": "Cultiva tus propias plantas en casa",
+            "categoria": 2,
+            "precio": "2,99",
+            "valoracion": 3,
+            "imagen": "curso2.jpg"
+        },
+        {
+            "nombre": "Reposteria",
+            "descripcion": "Prepara galletas caseras",
+            "categoria": 4,
+            "precio": "1,99",
+            "valoracion": 4,
+            "imagen": "curso5.jpg"
+        }
+    ],
+    "categorias": [
+        {
+            "nombre": "Hogar",
+            "id": 1
+        },
+        {
+            "nombre": "Informatica",
+            "id": 2
+        },
+        {
+            "nombre": "Jardineria",
+            "id": 3
+        },
+        {
+            "nombre": "Cocina",
+            "id": 4
+        }
+    ],
+    "0": {
+        "nombre": "Java",
+        "descripcion": "Java para Principiantes",
+        "categoria": "2",
+        "precio": "9,99",
+        "valoracion": "4",
+        "imagen": "curso1.jpg"
+    },
+    "1": {
+        "nombre": "Angular",
+        "descripcion": "Angular para Principiantes",
+        "categoria": "2",
+        "precio": "4,99",
+        "valoracion": "3",
+        "imagen": "http:\/\/localhost:3000\/img\/curso1.jpg"
+    }
+}

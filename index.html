@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>CURSOS</title>
+</head>
+
+<body>
+    <header>
+        <div class="two columns u-pull-right">
+            <ul>
+                <li class="submenu">
+                    <img src="img/carrito.png" id="img-carrito">
+                    <div id="carrito">
+
+                        <table id="lista-carrito" class="u-full-width">
+                            <thead>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <a href="#" id="vaciar-carrito" class="button u-full-width">Vaciar Carrito</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="logo" class="container-lg">
+            <img src="./img/logo-tienda.svg" alt="logo" class="img-fluid">
+        </div>
+    </header>
+    <div class="navbar navbar-expand-lg navbar-dark bg-warning bg-gradient p-3">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-4" href="index.html">Gestión de Cursos</a>
+            <a class="btn btn-info" type="button" id="añadirProducto">Añadir Curso</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link fs-4" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-4 active" aria-current="page" href="./favoritos.html">Mis Favoritos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Espacio para un búscador de productos dinámico -->
+        <div class="input-group" id="search-bar">
+            <input type="text" class="form-control" id="search" placeholder="Search" aria-label="Search"
+                aria-describedby="button-addon2">
+            <button class="btn btn-info" type="button" id="button-addon2">Search</button>
+        </div>
+    </div>
+    </nav>
+    <main class="mt-5 container-lg" id="main">
+        <h2 class="text-center fs-1">Categorías</h2>
+        <div class="d-md-flex justify-content-md-center mt-5 ">
+            <form id="selectCat" class="card col-md-8 bg-light p-5">
+                <div>
+                    <label for="categorias" class="form-label">Categoría</label>
+                    <select id="categorias" class="form-select">
+
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div id="resultado" class="mt-5 row"></div>
+        <div id="formularioProducto" class="mt-5 row">
+            <form name="productoForm" id="addProductos" class="row g-3 needs-validation" novalidate>
+                <div class="col-md-4">
+              <label for="validationDefault01" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="validationDefault01" value="" required>
+              <div class="invalid-feedback">This field is not valid.</div>
+              <div class="valid-feedback">ok.</div>
+            </div>
+                <div class="col-md-4">
+                    <label for="validationDefault02" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="validationDefault02" value="" required>
+                    <div class="invalid-feedback">This field is not valid.</div>
+                    <div class="valid-feedback">ok.</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="validationDefault03" class="form-label">Categoría</label>
+                    <input type="text" class="form-control" id="validationDefault03" value="" required>
+                    <div class="invalid-feedback">This field is not valid.</div>
+                    <div class="valid-feedback">ok.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationDefault04" class="form-label">Precio</label>
+                    <input type="text" class="form-control" id="validationDefault04" value="" required>
+                    <div class="invalid-feedback">This field is not valid.</div>
+                    <div class="valid-feedback">ok.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationDefault05" class="form-label">Valoración</label>
+                    <input type="number" class="form-control" id="validationDefault05" value="" required>
+                    <div class="invalid-feedback">This field is not valid.</div>
+                    <div class="valid-feedback">ok.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationDefault06" class="form-label">Imagen</label>
+                    <input type="txt" class="form-control" id="validationDefault06" value="" required title="Imagen"
+                        placeholder="Imagen">
+                    <div class="invalid-feedback">This field is not valid.</div>
+                    <div class="valid-feedback">ok.</div>
+                </div>
+                <div id="mensajes"></div>
+                <!-- <select id="selectCategoria"></select> -->
+                <div class="col-12">
+                    <button type="button" id="create" class="btn btn-primary">Create</button>
+                    <button type="button" id="random" class="btn btn-secondary">Get Random</button>
+                </div>
+            </form>
+        </div>
+        <div class="row my-3">
+            <table id="results" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Categoria</th>
+                        <th>Precio</th>
+                        <th>Valoración</th>
+                        <th>Cartel</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button type="button" id="send" class="btn btn-primary w-100">Send</button>
+                        </td>
+                        <td>
+                            <button type="button" id="delete" class="btn btn-secondary w-100">Delete</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="form-floating" id="textarea">
+                <label for="floatingTextarea">Curso Seleccionado: </label>
+                <textarea class="form-control floatingTextarea" id="selected-productos"></textarea>
+            </div>
+        </div>
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3 font-bold" id="staticBackdropLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer flex justify-content-between">
+                    <button type="submit" class="btn btn-success" id="btnFavoritos">Agregar a favoritos</button>
+                    <button type="button" id="btnClose" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script type="module" src="./js/asyncExam.js"></script>
+</body>
+</html>
