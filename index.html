@@ -20,11 +20,10 @@
                         <table id="lista-carrito" class="u-full-width">
                             <thead>
                                 <tr>
-                                    <th>Imagen</th>
                                     <th>Nombre</th>
                                     <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th></th>
+                                    <th>Imagen</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -82,11 +81,11 @@
         <div id="formularioProducto" class="mt-5 row">
             <form name="productoForm" id="addProductos" class="row g-3 needs-validation" novalidate>
                 <div class="col-md-4">
-              <label for="validationDefault01" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="validationDefault01" value="" required>
-              <div class="invalid-feedback">This field is not valid.</div>
-              <div class="valid-feedback">ok.</div>
-            </div>
+                    <label for="validationDefault01" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="validationDefault01" value="" required>
+                    <div class="invalid-feedback">This field is not valid.</div>
+                    <div class="valid-feedback">ok.</div>
+                </div>
                 <div class="col-md-4">
                     <label for="validationDefault02" class="form-label">Descripción</label>
                     <input type="text" class="form-control" id="validationDefault02" value="" required>
@@ -135,7 +134,7 @@
                         <th>Categoria</th>
                         <th>Precio</th>
                         <th>Valoración</th>
-                        <th>Cartel</th>
+                        <th>Imagen</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -171,6 +170,7 @@
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer flex justify-content-between">
+                    <button type="button" class="btn btn-warning" id="btnAgregaraCarrito">Agregar al Carrito</button>
                     <button type="submit" class="btn btn-success" id="btnFavoritos">Agregar a favoritos</button>
                     <button type="button" id="btnClose" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
                 </div>
@@ -181,4 +181,5 @@
     <script src="./js/jquery-3.7.1.min.js"></script>
     <script type="module" src="./js/asyncExam.js"></script>
 </body>
+
 </html>

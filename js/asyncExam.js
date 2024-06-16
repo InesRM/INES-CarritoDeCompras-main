@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
     modalBody: document.querySelector(".modal-body"),
     modalFooter: document.querySelector(".modal-footer"),
     selectCategorias: document.querySelector("#categorias"),
+    tablaCarrito: document.querySelector("#lista-carrito tbody"),
+    botonVaciarCarrito: document.getElementById("vaciar-carrito"),
+    btnAgregaraCarrito: document.getElementById("btnAgregaraCarrito"),
   };
 
   function clearForm() {
@@ -24,6 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("validationDefault04").value = "";
     document.getElementById("validationDefault05").value = "";
     document.getElementById("validationDefault06").value = "";
+  }
+
+  function cerrarModal() {
+    const modal = document.getElementById("modal");
+    const modalInstance = bootstrap.Modal.getInstance(modal);
+    modalInstance.hide();
   }
 
   function showAlert(message, type = "success") {
@@ -229,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //Mostrar los detalles de la película en el modal
+
   //Mostrar los detalles de la película en el modal
 //Mostrar los detalles del curso en el modal
 elements.resultadoElement.addEventListener("click", async (event) => {
@@ -251,9 +260,7 @@ elements.resultadoElement.addEventListener("click", async (event) => {
           elements.modalBody.innerHTML = `
             <img src="../img/${curso.imagen}" class="card-img-top" alt="${curso.nombre}">
             <h5 class="card-title">${curso.nombre}</h5>
-            <p class="card-text">${curso.descripcion}</p>
-            <p class="card-text">${curso.precio}</p>
-            <p class="card-text">${curso.valoracion} €</p>
+            <p class="card-text">${curso.precio}€</p>
           `;
 
           elements.btnFavoritos.dataset.cursoNombre = curso.nombre;
@@ -300,6 +307,7 @@ elements.resultadoElement.addEventListener("click", async (event) => {
           localStorage.setItem("favoritos", JSON.stringify(favoritos));
           alert("Agregado a favoritos correctamente");
           showAlert("Producto agregado a favoritos correctamente bis");
+          cerrarModal();
         } else {
           alert("Producto ya se encuentra en favoritos", "warning");
         }
@@ -411,4 +419,49 @@ elements.resultadoElement.addEventListener("click", async (event) => {
       showAlert("Por favor, selecciona un producto.", "danger");
     }
   });
+
+  //Añadir al carrito
+
+  elements.btnAgregaraCarrito.addEventListener("click", (event) => {
+   //los añadimos desde el modal, no desde la tabla
+    const nombre = elements.modalTitle.textContent;
+    console.log("Nombre del curso:", nombre);
+    const descripcion = elements.modalBody.querySelector("p").textContent;
+    const categoria = elements.modalBody.querySelector("p").textContent;
+    const precio = elements.modalBody.querySelector("p").textContent;
+    const valoracion = elements.modalBody.querySelector("p").textContent;
+    const imagen = elements.modalBody.querySelector("img").src;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${nombre}</td>
+      <td>${precio}</td>
+      <td><img src="${imagen}" width="50"></td>
+      <td>
+        <button class="btn btn-danger btn-remove">X</button>
+      </td>
+    `;
+    elements.tablaCarrito.appendChild(row);
+   alert("Producto añadido al carrito correctamente.");
+    cerrarModal();
+  });
+
+  
+    elements.tablaCarrito.addEventListener("click", (event) => {
+      if (event.target.classList.contains("btn-remove")) {
+        event.target.closest("tr").remove();
+        showAlert("Producto eliminado del carrito correctamente.");
+      }
+    });
+
+
+  //Vaciar carrito
+  elements.botonVaciarCarrito.addEventListener("click", () => {
+    elements.tablaCarrito.innerHTML = "";
+  });
+
+  
+
+
+
 });

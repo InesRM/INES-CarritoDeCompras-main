@@ -91,15 +91,17 @@ h1 {
   display: block;
   position: absolute;
   right:0;
-
   top:100%;
   z-index: 1;
-  background-color: white;
+  background-color: rgb(249, 204, 144);
   padding: 20px;
   min-height: 400px;
-  min-width: 300px;
+  min-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 }
+
 #img-carrito{
   float: right;
   margin:20px;
@@ -108,4 +110,22 @@ h1 {
 }
 ul {
   list-style: none;
+}
+#lista-carrito thead th{
+  background-color: rgb(249, 204, 144);
+  border: 2px solid #0e0e10 ;
+  margin: 20px;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#lista-carrito tbody tr td{
+  padding: 10px;
+  border: 1px solid #0e0e10;
+}
+#lista-carrito tbody tr td img{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }
