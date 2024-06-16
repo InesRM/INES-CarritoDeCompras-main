@@ -2,3 +2,10 @@ Java Descripcion:  Java para Principiantes precio: 9,99
 Angular Descripcion:  Angular para Principiantes precio: 4,99
 Laravel Descripcion:  Curso completo de Laravel precio: 23,66
 C++ Descripcion:  Programacion en C precio: 21
+Flores Descripcion:  curso para floristerias precio: 12
+Flores y Plantas Descripcion:  Curso para el cuidado de floristerías precio: 12
+Plantas Descripcion:  plantas precio: 12
+Flores y Plantas Descripcion:  Curso de plantas de interior precio: 12,99
+Plantas Descripcion:  Cuidados de las plantas precio: 12
+Jardines verticales Descripcion:  jardines decoracion precio: 12
+Jardines Verticales Descripcion:  Flores y plantas cuidados precio: 12

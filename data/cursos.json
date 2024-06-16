@@ -30,7 +30,7 @@
             "nombre": "JavaScript",
             "descripcion": "JavaScript para Principiantes",
             "categoria": 2,
-            "precio": "5,99",
+            "precio": 5.99,
             "valoracion": 4,
             "imagen": "curso1.jpg"
         },
@@ -46,7 +46,7 @@
             "nombre": "Vegetales",
             "descripcion": "Cosecha tus propias frutas en casa",
             "categoria": 3,
-            "precio": "3,99",
+            "precio": 3.99,
             "valoracion": 4,
             "imagen": "curso4.jpg"
         },
@@ -54,7 +54,7 @@
             "nombre": "Angular",
             "descripcion": "Angular para Principiantes",
             "categoria": 2,
-            "precio": "4,99",
+            "precio": 6.99,
             "valoracion": 3,
             "imagen": "curso7.png"
         },
@@ -62,7 +62,7 @@
             "nombre": "Musica Clasica",
             "descripcion": "Aprende a tocar el piano",
             "categoria": 1,
-            "precio": "6,99",
+            "precio": 6.99,
             "valoracion": 3,
             "imagen": "curso3.jpg"
         },
@@ -70,7 +70,7 @@
             "nombre": "Horticultura",
             "descripcion": "Cultiva tus propias plantas en casa",
             "categoria": 4,
-            "precio": "2,99",
+            "precio": 2.99,
             "valoracion": 3,
             "imagen": "curso2.jpg"
         },
@@ -78,7 +78,7 @@
             "nombre": "Reposteria",
             "descripcion": "Prepara galletas caseras",
             "categoria": 4,
-            "precio": "1,99",
+            "precio": 1.99,
             "valoracion": 4,
             "imagen": "curso5.jpg"
         },
@@ -86,9 +86,17 @@
             "nombre": "Python",
             "descripcion": "Programacion en Java",
             "categoria": 2,
-            "precio": "21",
+            "precio": 21,
             "valoracion": 5,
             "imagen": "curso6.png"
+        },
+        {
+            "nombre": "Jardines Verticales",
+            "descripcion": "Flores y plantas cuidados",
+            "categoria": 3,
+            "precio": 12,
+            "valoracion": 3,
+            "imagen": "curso5.jpg"
         }
     ],
     "categorias": [
@@ -109,5 +117,4 @@
             "id": 4
         }
     ]
-    
 }

@@ -46,13 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function validateForm() {
     const nombre = document.getElementById("validationDefault01").value;
     const descripcion = document.getElementById("validationDefault02").value;
-    const categoria = parseInt(document.getElementById("validationDefault03").value);
+    const categoria = document.getElementById("validationDefault03").value
+    
     const precio = parseFloat(
       document.getElementById("validationDefault04").value
     );
-    const valoracion = parseInt(
-      document.getElementById("validationDefault05").value
-    );
+    const valoracion = document.getElementById("validationDefault05").value
+  
     const imagen = document.getElementById("validationDefault06").value;
 
     if (
@@ -67,8 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
-    if (isNaN(precio) || isNaN(categoria)|| isNaN(valoracion)) {
-      showAlert("El precio, la categoría y la valoración deben ser números.", "danger");
+    if (isNaN(precio) || isNaN(categoria) || isNaN(valoracion)) {
+      showAlert(
+        "El precio, la categoría y la valoración deben ser números.",
+        "danger"
+      );
       return false;
     }
 
@@ -329,7 +332,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const precio = document.getElementById("validationDefault04").value;
       const valoracion = document.getElementById("validationDefault05").value;
       const imagen = document.getElementById("validationDefault06").value;
+      //precio, valoración y categoría son números
 
+    
       addRowToTable(nombre, descripcion, categoria, precio, valoracion, imagen);
       showAlert("curso creada correctamente.");
       clearForm();
@@ -377,14 +382,14 @@ document.addEventListener("DOMContentLoaded", () => {
   elements.sendButton.addEventListener("click", async () => {
     const selectedRow = elements.resultsTableBody.querySelector("tr.selected");
     const fullImagePath = selectedRow.cells[5].querySelector("img").src;
-    const imageName = fullImagePath.split('/').pop(); // Extrae solo el nombre de la imagen
+    const imageName = fullImagePath.split("/").pop(); // Extrae solo el nombre de la imagen
     if (selectedRow) {
       const productData = {
         nombre: selectedRow.cells[0].textContent,
         descripcion: selectedRow.cells[1].textContent,
-        categoria: selectedRow.cells[2].textContent,
-        precio: selectedRow.cells[3].textContent,
-        valoracion: selectedRow.cells[4].textContent,
+        categoria:parseInt( selectedRow.cells[2].textContent, 10),
+        precio: parseFloat(selectedRow.cells[3].textContent),
+        valoracion: parseInt(selectedRow.cells[4].textContent),
         imagen: imageName,
       };
 
@@ -444,6 +449,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <td>
         <button class="btn btn-danger btn-remove">X</button>
       </td>
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal" data-curso-name="${nombre}">Pagar</button>
     `;
     elements.tablaCarrito.appendChild(row);
     alert("Producto añadido al carrito correctamente.");
@@ -461,4 +467,6 @@ document.addEventListener("DOMContentLoaded", () => {
   elements.botonVaciarCarrito.addEventListener("click", () => {
     elements.tablaCarrito.innerHTML = "";
   });
+
+  
 });
