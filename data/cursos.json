@@ -20,6 +20,9 @@
         },
         {
             "nombre": "Reposteria"
+        },
+        {
+            "nombre": "Python"
         }
     ],
     "curso": [
@@ -53,7 +56,7 @@
             "categoria": 2,
             "precio": "4,99",
             "valoracion": 3,
-            "imagen": "curso1.jpg"
+            "imagen": "curso7.png"
         },
         {
             "nombre": "Musica Clasica",
@@ -66,7 +69,7 @@
         {
             "nombre": "Horticultura",
             "descripcion": "Cultiva tus propias plantas en casa",
-            "categoria": 2,
+            "categoria": 4,
             "precio": "2,99",
             "valoracion": 3,
             "imagen": "curso2.jpg"
@@ -78,6 +81,14 @@
             "precio": "1,99",
             "valoracion": 4,
             "imagen": "curso5.jpg"
+        },
+        {
+            "nombre": "Python",
+            "descripcion": "Programacion en Java",
+            "categoria": 2,
+            "precio": "21",
+            "valoracion": 5,
+            "imagen": "curso6.png"
         }
     ],
     "categorias": [
@@ -97,29 +108,6 @@
             "nombre": "Cocina",
             "id": 4
         }
-    ],
-    "0": {
-        "nombre": "Java",
-        "descripcion": "Java para Principiantes",
-        "categoria": "2",
-        "precio": "9,99",
-        "valoracion": "4",
-        "imagen": "curso1.jpg"
-    },
-    "1": {
-        "nombre": "Angular",
-        "descripcion": "Angular para Principiantes",
-        "categoria": "2",
-        "precio": "4,99",
-        "valoracion": "3",
-        "imagen": "http:\/\/localhost:3000\/img\/curso1.jpg"
-    },
-    "2": {
-        "nombre": "Laravel",
-        "descripcion": "Curso completo de Laravel",
-        "categoria": "2",
-        "precio": "23,66",
-        "valoracion": "5",
-        "imagen": "http:\/\/localhost:3000\/img\/curso8.jpg"
-    }
+    ]
+    
 }
