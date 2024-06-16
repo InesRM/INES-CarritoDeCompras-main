@@ -238,82 +238,87 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   //Mostrar los detalles de la película en el modal
-//Mostrar los detalles del curso en el modal
-elements.resultadoElement.addEventListener("click", async (event) => {
-  if (event.target.classList.contains("btn-primary")) {
-    const name = event.target.getAttribute("data-curso-name");
-    console.log("Nombre del curso:", name); // Log del nombre del curso (película)
-    try {
-      const response = await fetch(`../php/getCursos.php?nombre=${name}`);
-      const cursoArray = await response.json();
-      console.log("Curso Array:", cursoArray); // Log del array de curso
+  //Mostrar los detalles del curso en el modal
+  elements.resultadoElement.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("btn-primary")) {
+      const name = event.target.getAttribute("data-curso-name");
+      console.log("Nombre del curso:", name); // Log del nombre del curso (película)
+      try {
+        const response = await fetch(`../php/getCursos.php?nombre=${name}`);
+        const cursoArray = await response.json();
+        console.log("Curso Array:", cursoArray); // Log del array de curso
 
-      if (cursoArray.length > 0) {
-        const curso = cursoArray[0]; //el servidor devuelve un array con un solo elemento hay que extraerlo
-        console.log("Curso:", curso); // Log del curso
+        if (cursoArray.length > 0) {
+          const curso = cursoArray[0]; //el servidor devuelve un array con un solo elemento hay que extraerlo
+          console.log("Curso:", curso); // Log del curso
 
-        // Verificación adicional del contenido del curso
-        if (curso && curso.nombre && curso.imagen && curso.descripcion && curso.precio && curso.valoracion && curso.categoria) {
-          elements.modalTitle.textContent = curso.nombre;
-          elements.modalBody.innerHTML = `
+          // Verificación adicional del contenido del curso
+          if (
+            curso &&
+            curso.nombre &&
+            curso.imagen &&
+            curso.descripcion &&
+            curso.precio &&
+            curso.valoracion &&
+            curso.categoria
+          ) {
+            elements.modalTitle.textContent = curso.nombre;
+            elements.modalBody.innerHTML = `
             <img src="../img/${curso.imagen}" class="card-img-top" alt="${curso.nombre}">
             <h5 class="card-title">${curso.nombre}</h5>
             <p class="card-text">${curso.precio}€</p>
           `;
 
-          elements.btnFavoritos.dataset.cursoNombre = curso.nombre;
-          elements.btnFavoritos.dataset.cursoDescripcion = curso.descripcion;
-          elements.btnFavoritos.dataset.cursoCategoria = curso.categoria;
-          elements.btnFavoritos.dataset.cursoPrecio = curso.precio;
-          elements.btnFavoritos.dataset.cursoValoracion = curso.valoracion;
-          elements.btnFavoritos.dataset.cursoImagen = curso.imagen;
+            elements.btnFavoritos.dataset.cursoNombre = curso.nombre;
+            elements.btnFavoritos.dataset.cursoDescripcion = curso.descripcion;
+            elements.btnFavoritos.dataset.cursoCategoria = curso.categoria;
+            elements.btnFavoritos.dataset.cursoPrecio = curso.precio;
+            elements.btnFavoritos.dataset.cursoValoracion = curso.valoracion;
+            elements.btnFavoritos.dataset.cursoImagen = curso.imagen;
+          } else {
+            console.error("Datos del curso incompletos", curso);
+          }
         } else {
-          console.error("Datos del curso incompletos", curso);
+          console.error("No se encontraron cursos con el nombre proporcionado");
         }
-      } else {
-        console.error("No se encontraron cursos con el nombre proporcionado");
+      } catch (error) {
+        console.error("Error al obtener el producto", error);
       }
-    } catch (error) {
-      console.error("Error al obtener el producto", error);
     }
-  }
-});
+  });
 
+  //Añadir a favoritos
+  elements.modalFooter.addEventListener("click", (event) => {
+    if (event.target.id === "btnFavoritos") {
+      const {
+        cursoNombre: nombre,
+        cursoDescripcion: descripcion,
+        cursoCategoria: categoria,
+        cursoPrecio: precio,
+        cursoValoracion: valoracion,
+        cursoImagen: imagen,
+      } = event.target.dataset;
 
-    //Añadir a favoritos
-    elements.modalFooter.addEventListener("click", (event) => {
-      if (event.target.id === "btnFavoritos") {
-        const {
-          cursoNombre: nombre,
-          cursoDescripcion: descripcion,
-          cursoCategoria: categoria,
-          cursoPrecio: precio,
-          cursoValoracion: valoracion,
-          cursoImagen: imagen,
-        } = event.target.dataset;
-
-        let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-        if (!favoritos.some((curso) => curso.nombre === nombre)) {
-          favoritos.push({
-            nombre,
-            descripcion,
-            categoria,
-            precio,
-            valoracion,
-            imagen,
-          });
-          localStorage.setItem("favoritos", JSON.stringify(favoritos));
-          alert("Agregado a favoritos correctamente");
-          showAlert("Producto agregado a favoritos correctamente bis");
-          cerrarModal();
-        } else {
-          alert("Producto ya se encuentra en favoritos", "warning");
-        }
+      let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+      if (!favoritos.some((curso) => curso.nombre === nombre)) {
+        favoritos.push({
+          nombre,
+          descripcion,
+          categoria,
+          precio,
+          valoracion,
+          imagen,
+        });
+        localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        alert("Agregado a favoritos correctamente");
+        showAlert("Producto agregado a favoritos correctamente bis");
+        cerrarModal();
+      } else {
+        alert("Producto ya se encuentra en favoritos", "warning");
       }
-    });
- 
+    }
+  });
 
   //crear una nuevo curso
   elements.createButton.addEventListener("click", () => {
@@ -423,13 +428,10 @@ elements.resultadoElement.addEventListener("click", async (event) => {
   //Añadir al carrito
 
   elements.btnAgregaraCarrito.addEventListener("click", (event) => {
-   //los añadimos desde el modal, no desde la tabla
+    //los añadimos desde el modal, no desde la tabla
     const nombre = elements.modalTitle.textContent;
     console.log("Nombre del curso:", nombre);
-    const descripcion = elements.modalBody.querySelector("p").textContent;
-    const categoria = elements.modalBody.querySelector("p").textContent;
     const precio = elements.modalBody.querySelector("p").textContent;
-    const valoracion = elements.modalBody.querySelector("p").textContent;
     const imagen = elements.modalBody.querySelector("img").src;
 
     const row = document.createElement("tr");
@@ -442,26 +444,19 @@ elements.resultadoElement.addEventListener("click", async (event) => {
       </td>
     `;
     elements.tablaCarrito.appendChild(row);
-   alert("Producto añadido al carrito correctamente.");
+    alert("Producto añadido al carrito correctamente.");
     cerrarModal();
   });
 
-  
-    elements.tablaCarrito.addEventListener("click", (event) => {
-      if (event.target.classList.contains("btn-remove")) {
-        event.target.closest("tr").remove();
-        showAlert("Producto eliminado del carrito correctamente.");
-      }
-    });
-
+  elements.tablaCarrito.addEventListener("click", (event) => {
+    if (event.target.classList.contains("btn-remove")) {
+      event.target.closest("tr").remove();
+      showAlert("Producto eliminado del carrito correctamente.");
+    }
+  });
 
   //Vaciar carrito
   elements.botonVaciarCarrito.addEventListener("click", () => {
     elements.tablaCarrito.innerHTML = "";
   });
-
-  
-
-
-
 });

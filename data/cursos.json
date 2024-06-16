@@ -113,5 +113,13 @@
         "precio": "4,99",
         "valoracion": "3",
         "imagen": "http:\/\/localhost:3000\/img\/curso1.jpg"
+    },
+    "2": {
+        "nombre": "Laravel",
+        "descripcion": "Curso completo de Laravel",
+        "categoria": "2",
+        "precio": "23,66",
+        "valoracion": "5",
+        "imagen": "http:\/\/localhost:3000\/img\/curso8.jpg"
     }
 }
