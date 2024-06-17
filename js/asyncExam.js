@@ -433,41 +433,73 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //Añadir al carrito
+// Función para guardar el carrito en localStorage
+const guardarCarrito = () => {
+  const rows = Array.from(elements.tablaCarrito.querySelectorAll("tr"));
+  const carrito = rows.map(row => {
+    const columns = row.querySelectorAll("td");
+    return {
+      nombre: columns[0].textContent,
+      precio: columns[1].textContent,
+      imagen: columns[2].querySelector("img").src
+    };
+  });
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+};
 
-  elements.btnAgregaraCarrito.addEventListener("click", (event) => {
-    //los añadimos desde el modal, no desde la tabla
-    const nombre = elements.modalTitle.textContent;
-    console.log("Nombre del curso:", nombre);
-    const precio = elements.modalBody.querySelector("p").textContent;
-    const imagen = elements.modalBody.querySelector("img").src;
-
+// Función para cargar el carrito desde localStorage
+const cargarCarrito = () => {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  carrito.forEach(item => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${nombre}</td>
-      <td>${precio}</td>
-      <td><img src="${imagen}" width="50"></td>
-      <td>
-        <button class="btn btn-danger btn-remove">X</button>
-      </td>
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal" data-curso-name="${nombre}">Pagar</button>
+      <td>${item.nombre}</td>
+      <td>${item.precio}</td>
+      <td><img src="${item.imagen}" width="50"></td>
+      <td><button class="btn btn-danger btn-remove">X</button></td>
     `;
     elements.tablaCarrito.appendChild(row);
-    alert("Producto añadido al carrito correctamente.");
-    cerrarModal();
   });
+};
 
-  elements.tablaCarrito.addEventListener("click", (event) => {
-    if (event.target.classList.contains("btn-remove")) {
-      event.target.closest("tr").remove();
-      showAlert("Producto eliminado del carrito correctamente.");
-    }
-  });
+// Cargar el carrito al cargar la página
+cargarCarrito();
 
-  //Vaciar carrito
-  elements.botonVaciarCarrito.addEventListener("click", () => {
-    elements.tablaCarrito.innerHTML = "";
-  });
+elements.btnAgregaraCarrito.addEventListener("click", (event) => {
+  // Añadir producto desde el modal
+  const nombre = elements.modalTitle.textContent;
+  const precio = elements.modalBody.querySelector("p").textContent;
+  const imagen = elements.modalBody.querySelector("img").src;
 
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${nombre}</td>
+    <td>${precio}</td>
+    <td><img src="${imagen}" width="50"></td>
+    <td><button class="btn btn-danger btn-remove">X</button></td>
+  `;
+  elements.tablaCarrito.appendChild(row);
+  showAlert("Producto añadido al carrito correctamente.");
+
+  guardarCarrito();
+  cerrarModal();
+});
+
+elements.tablaCarrito.addEventListener("click", (event) => {
+  if (event.target.classList.contains("btn-remove")) {
+    event.target.closest("tr").remove();
+    showAlert("Producto eliminado del carrito correctamente.");
+    guardarCarrito();
+  }
+});
+
+// Vaciar carrito
+elements.botonVaciarCarrito.addEventListener("click", () => {
+  elements.tablaCarrito.innerHTML = "";
+  localStorage.removeItem("carrito");
+});
+
+  
   //COOKIES*************************************************************
   // Función para crear una cookie
   function setCookie(name, value, days) {
