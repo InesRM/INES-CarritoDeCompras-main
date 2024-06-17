@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
     modalBody: document.querySelector(".modal-body"),
     modalFooter: document.querySelector(".modal-footer"),
     selectCategorias: document.querySelector("#categorias"),
+    loginButton: document.getElementById("login"),
+    registroButton: document.getElementById("registro"),
+    cookieConsentContainer: document.getElementById("cookieConsentContainer"),
+    acceptCookiesBtn: document.getElementById("acceptCookiesBtn"),
   };
 
   function clearForm() {
@@ -60,7 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       return false;
     }
-    if (cartel.split(".").pop() !== "jpg" && cartel.split(".").pop() !== "png" && cartel.split(".").pop() !== "jpeg"){
+    if (
+      cartel.split(".").pop() !== "jpg" &&
+      cartel.split(".").pop() !== "png" &&
+      cartel.split(".").pop() !== "jpeg"
+    ) {
       showAlert("La imagen debe ser un archivo .jpg o .png, jpeg", "danger");
       return false;
     }
@@ -109,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("search");
 
     elements.searchButton.addEventListener("click", () => {
-
       const searchValue = searchInput.value;
 
       if (!searchValue) {
@@ -277,7 +284,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = document.getElementById("validationDefault01").value;
       const nombre = document.getElementById("validationDefault02").value;
       const director = document.getElementById("validationDefault03").value;
-      const clasificacion = document.getElementById("validationDefault04").value;
+      const clasificacion = document.getElementById(
+        "validationDefault04"
+      ).value;
       const valoracion = document.getElementById("validationDefault05").value;
       const cartel = document.getElementById("validationDefault06").value;
 
@@ -289,7 +298,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Elemento seleccionado
   elements.resultsTableBody.addEventListener("click", (event) => {
-    
     const clickedRow = event.target.closest("tr");
     if (!clickedRow) return;
 
@@ -311,15 +319,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Elementos random
 
-elements.randomButton.addEventListener("click", () => {
+  elements.randomButton.addEventListener("click", () => {
     fetch("../php/getRandomFilm.php")
       .then((response) => response.json())
       .then((pelicula) => {
         document.getElementById("validationDefault01").value = pelicula.id;
         document.getElementById("validationDefault02").value = pelicula.nombre;
-        document.getElementById("validationDefault03").value = pelicula.director;
-        document.getElementById("validationDefault04").value = pelicula.clasificacion;
-        document.getElementById("validationDefault05").value = pelicula.valoracion;
+        document.getElementById("validationDefault03").value =
+          pelicula.director;
+        document.getElementById("validationDefault04").value =
+          pelicula.clasificacion;
+        document.getElementById("validationDefault05").value =
+          pelicula.valoracion;
         document.getElementById("validationDefault06").value = pelicula.cartel;
       })
       .catch((error) =>
@@ -359,7 +370,7 @@ elements.randomButton.addEventListener("click", () => {
     }
   });
 
-  const formulario= document.getElementById("addProductos");
+  const formulario = document.getElementById("addProductos");
   const formularioProducto = document.getElementById("formularioProducto");
   const boton = document.getElementById("añadirProducto");
 
@@ -368,9 +379,8 @@ elements.randomButton.addEventListener("click", () => {
     document.getElementById("selectCat").style.display = "none";
     formulario.style.display = "block";
     formularioProducto.style.display = "block";
-
   });
-  
+
   elements.deleteButton.addEventListener("click", () => {
     const selectedRow = elements.resultsTableBody.querySelector("tr.selected");
     if (selectedRow) {
@@ -379,8 +389,41 @@ elements.randomButton.addEventListener("click", () => {
     } else {
       showAlert("Por favor, selecciona un producto.", "danger");
     }
+  });
 
+  //COOKIES
+  // Función para crear una cookie
+  function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+  }
+
+  // Función para obtener una cookie
+  function getCookie(name) {
+    const cname = name + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(cname) === 0) {
+        return c.substring(cname.length, c.length);
+      }
+    }
+    return "";
+  }
+  // Verificar si la cookie de consentimiento existe
+  if (getCookie("cookieConsent") !== "accepted") {
+    cookieConsentContainer.style.display = "block";
+  }
+
+  // Manejar el clic en el botón de aceptar cookies
+  acceptCookiesBtn.addEventListener("click", function () {
+    setCookie("cookieConsent", "accepted", 30);
+    cookieConsentContainer.style.display = "none";
+  });
 });
-
-});
-

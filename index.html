@@ -10,7 +10,12 @@
 </head>
 
 <body>
+    <div id="cookieConsentContainer" class="cookie-consent-container">
+        <p>Este sitio utiliza cookies para mejorar su experiencia. Al continuar navegando, acepta el uso de cookies.</p>
+        <button type="button" id="acceptCookiesBtn">Aceptar</button>
+    </div>
     <header>
+        
         <div class="two columns u-pull-right">
             <ul>
                 <li class="submenu">
@@ -36,6 +41,9 @@
         <div id="logo" class="container-lg">
             <img src="./img/logo-tienda.svg" alt="logo" class="img-fluid">
         </div>
+<!-- BOTONES LOGIN Y REGISTRO -->
+        <button type="button" id="login" class="btn btn-secondary">Iniciar Sesión</button>
+        <button type="button" id="registro" class="btn btn-primary">Registrarse</button>
     </header>
     <div class="navbar navbar-expand-lg navbar-dark bg-warning bg-gradient p-3">
         <div class="container-fluid">
@@ -176,6 +184,8 @@
             </div>
         </div>
     </div>
+  
+
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/jquery-3.7.1.min.js"></script>
     <script type="module" src="./js/asyncExam.js"></script>
