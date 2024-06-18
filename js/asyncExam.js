@@ -466,43 +466,7 @@ const cargarCarrito = () => {
 
 // Cargar el carrito al cargar la página
 cargarCarrito();
-// Función para guardar el carrito en localStorage
-const guardarCarrito = () => {
-  const rows = Array.from(elements.tablaCarrito.querySelectorAll("tr"));
-  const carrito = rows.map(row => {
-    const columns = row.querySelectorAll("td");
-    return {
-      nombre: columns[0].textContent,
-      precio: columns[1].textContent,
-      imagen: columns[2].querySelector("img").src
-    };
-  });
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-};
 
-// Función para cargar el carrito desde localStorage
-const cargarCarrito = () => {
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  carrito.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${item.nombre}</td>
-      <td>${item.precio}</td>
-      <td><img src="${item.imagen}" width="50"></td>
-      <td><button class="btn btn-danger btn-remove">X</button></td>
-    `;
-    elements.tablaCarrito.appendChild(row);
-  });
-};
-
-// Cargar el carrito al cargar la página
-cargarCarrito();
-
-elements.btnAgregaraCarrito.addEventListener("click", (event) => {
-  // Añadir producto desde el modal
-  const nombre = elements.modalTitle.textContent;
-  const precio = elements.modalBody.querySelector("p").textContent;
-  const imagen = elements.modalBody.querySelector("img").src;
 elements.btnAgregaraCarrito.addEventListener("click", (event) => {
   // Añadir producto desde el modal
   const nombre = elements.modalTitle.textContent;
@@ -530,59 +494,6 @@ elements.tablaCarrito.addEventListener("click", (event) => {
     guardarCarrito();
   }
 });
-elements.tablaCarrito.addEventListener("click", (event) => {
-  if (event.target.classList.contains("btn-remove")) {
-    event.target.closest("tr").remove();
-    showAlert("Producto eliminado del carrito correctamente.");
-    guardarCarrito();
-  }
-});
-
-// Vaciar carrito
-elements.botonVaciarCarrito.addEventListener("click", () => {
-  elements.tablaCarrito.innerHTML = "";
-  localStorage.removeItem("carrito");
-});
-
-  
-  //COOKIES*************************************************************
-  // Función para crear una cookie
-  function setCookie(name, value, days) {
-    const d = new Date();
-    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-    const expires = "expires=" + d.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-  }
-
-  // Función para obtener una cookie
-  function getCookie(name) {
-    const cname = name + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(cname) === 0) {
-        return c.substring(cname.length, c.length);
-      }
-    }
-    return "";
-  }
-  // Verificar si la cookie de consentimiento existe
-  if (getCookie("cookieConsent") !== "accepted") {
-    cookieConsentContainer.style.display = "block";
-  }
-
-  // Manejar el clic en el botón de aceptar cookies
-  acceptCookiesBtn.addEventListener("click", function () {
-    setCookie("cookieConsent", "accepted", 30);
-    cookieConsentContainer.style.display = "none";
-  });
-});
-
-  
 
 // Vaciar carrito
 elements.botonVaciarCarrito.addEventListener("click", () => {
